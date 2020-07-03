@@ -2,19 +2,65 @@
 
 {% block title %}Hello MainController!{% endblock %}
 
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app_css') }}
+{% endblock %}
+
+{% block head %}
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+{% endblock %}
+
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/szymon/SymfonyProjects/CarsManager/src/Controller/MainController.php'|file_link(0) }}">src/Controller/MainController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/szymon/SymfonyProjects/CarsManager/templates/main/index.html.twig'|file_link(0) }}">templates/main/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container-fluid" id="main-container">
+        <div class="col-md-12" id="div-header">
+            <h2>Simple CRUD cars manager system</h2>
+        </div>
+        <div class="container-fluid" id="nav">
+            <div class="row" id="nav-div">
+                    <button type="button" class="btn btn-primary" id="add-car-btn">Add car</button>
+                    <button type="button" class="btn btn-primary" id="remove-car-btn">Remove car</button>
+                    <button type="button" class="btn btn-primary" id="update-car-btn">Update car</button>
+                    <button type="button" class="btn btn-primary" id="display-car-btn">Display car</button>
+            </div>
+        </div>
+        <div class="container-fluid" id="create-form-div">
+            <h4>Enter car's details to add it to the database</h4>
+            {{ form_start(form) }}
+            <form id="form-add-car">
+                <div class="form-group w-25">
+                    {{ form_row(form.mark) }}
+                    <small id="emailHelp" class="form-text text-muted">e.g. Volkswagen, BMW, Opel etc.</small>
+                </div>
+                <div class="form-group w-25">
+                    {{ form_row(form.model) }}
+                    <small id="emailHelp" class="form-text text-muted">e.g. Golf, series 3, Astra etc.</small>
+                </div>
+                <div class="form-group w-25">
+                    {{ form_row(form.yearProd) }}
+                    <small id="emailHelp" class="form-text text-muted">4-digit number e.g. 1996, 2019</small>
+                </div>
+                <div class="form-group w-25">
+                    {{ form_row(form.engineType) }}
+                </div>
+                <div class="form-group w-25">
+                    {{ form_row(form.engineCapacity) }}
+                    <small id="emailHelp" class="form-text text-muted">e.g. 2,5 (dm3)</small>
+                </div>
+                <div class="form-group w-25">
+                    {{ form_row(form.vin) }}
+                    <small id="emailHelp" class="form-text text-muted">16-digit unique series number e.g. WOL123456789123</small>
+                </div>
+                <div class="form-check">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
 {% endblock %}

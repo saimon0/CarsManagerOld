@@ -5,40 +5,42 @@ namespace App\Controller;
 use App\Entity\Car;
 use App\Form\CarType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\BrowserKit\Request;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
     /**
-     * @Route("/main", name="main")
+     * @Route("/success", name="success")
      */
-    public function index()
+    public function successPage()
     {
-        $form = $this->createForm(CarType::class);
-
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
-            'form' => $form->createView(),
-        ]);
+        return $this->render('main/success.html.twig');
     }
 
-    public function newCar(Request $request, CarType $form)
+    /**
+     * @Route("/main", name="main")
+     */
+    public function index(Request $request)
     {
-        $car = new Car();
-
+        $form = $this->createForm(CarType::class);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid())
+
+        if($form->isSubmitted())
         {
-            $form->getData();
+            $car = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($car);
             $entityManager->flush();
-
+            //var_dump($car);
+            //var_dump("gites dodano do bazy");
             return $this->redirectToRoute('success');
         }
 
-
+        return $this->render('main/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

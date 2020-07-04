@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Car;
 use App\Form\CarType;
+use App\Form\RemoveCarType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,11 +13,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class MainController extends AbstractController
 {
     /**
-     * @Route("/success", name="success")
+     * @Route("/remove", name="remove")
      */
     public function successPage()
     {
-        return $this->render('main/success.html.twig');
+        return $this->render('main/remove_success.html.twig');
+    }
+
+    /**
+     * @Route("/success", name="success")
+     */
+    public function removeSuccessPage()
+    {
+        return $this->render('main/remove_success.html.twig');
     }
 
     /**
@@ -25,6 +34,8 @@ class MainController extends AbstractController
     public function index(Request $request)
     {
         $form = $this->createForm(CarType::class);
+        $removeForm = $this->createForm(RemoveCarType::class);
+
         $form->handleRequest($request);
 
         if($form->isSubmitted())
@@ -38,9 +49,21 @@ class MainController extends AbstractController
             //var_dump("gites dodano do bazy");
             return $this->redirectToRoute('success');
         }
+        if($removeForm->isSubmitted())
+        {
+            $id = $removeForm->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            //$entityManager->flush();
+            var_dump($id);
+            //var_dump("gites dodano do bazy");
+            return $this->redirectToRoute('remove');
+        }
 
         return $this->render('main/index.html.twig', [
             'form' => $form->createView(),
+            'removeForm' => $removeForm->createView(),
         ]);
     }
 }

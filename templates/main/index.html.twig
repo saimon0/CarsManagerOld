@@ -23,7 +23,7 @@
                     <button type="button" class="btn btn-primary" id="add-car-btn">Add car</button>
                     <button type="button" class="btn btn-primary" id="remove-car-btn">Remove car</button>
                     <button type="button" class="btn btn-primary" id="update-car-btn">Update car</button>
-                    <button type="button" class="btn btn-primary" id="display-car-btn">Display car</button>
+                    <button type="button" class="btn btn-primary" id="display-car-btn">Display cars</button>
             </div>
         </div>
         <div class="container-fluid" id="create-form-div">
@@ -59,6 +59,19 @@
             </form>
             {{ form_end(form) }}
         </div>
+    </div>
+    <div class="container-fluid" id="remove-form-div">
+        <h4>Enter car's id to remove it from the database</h4>
+        {{ form_start(removeForm) }}
+        <form id="form-remove-car">
+            <div class="form-group w-25">
+                {{ form_row(removeForm.id) }}
+                <small id="emailHelp" class="form-text text-muted">Car's identifier is presented in "Display cars" tab</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        {{ form_end(removeForm) }}
+    </div>
     </div>
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}

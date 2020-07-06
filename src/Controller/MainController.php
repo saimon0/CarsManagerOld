@@ -17,7 +17,7 @@ class MainController extends AbstractController
      */
     public function successPage()
     {
-        return $this->render('main/remove_success.html.twig');
+        return $this->render('main/remove_successed.html.twig');
     }
 
     /**
@@ -25,7 +25,23 @@ class MainController extends AbstractController
      */
     public function removeSuccessPage()
     {
-        return $this->render('main/remove_success.html.twig');
+        return $this->render('main/success.html.twig');
+    }
+
+    /**
+     * @Route("/remove/failed", name="remove_failed")
+     */
+    public function removeFailedPage()
+    {
+        return $this->render('main/remove_failed.html.twig');
+    }
+
+    /**
+     * @Route("/remove/success", name="remove_successed")
+     */
+    public function removeSuccessedPage()
+    {
+        return $this->render('main/remove_successed.html.twig');
     }
 
     /**
@@ -33,14 +49,14 @@ class MainController extends AbstractController
      */
     public function index(Request $request)
     {
-        $form = $this->createForm(CarType::class);
+        $createForm = $this->createForm(CarType::class);
         $removeForm = $this->createForm(RemoveCarType::class);
 
-        $form->handleRequest($request);
+        $createForm->handleRequest($request);
 
-        if($form->isSubmitted())
+        if($createForm->isSubmitted())
         {
-            $car = $form->getData();
+            $car = $createForm->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($car);
@@ -49,20 +65,34 @@ class MainController extends AbstractController
             //var_dump("gites dodano do bazy");
             return $this->redirectToRoute('success');
         }
-        if($removeForm->isSubmitted())
+
+        $removeForm->handleRequest($request);
+
+        if ($removeForm->isSubmitted())
         {
-            $id = $removeForm->getData();
+            $car = $removeForm->getData();
 
-            $entityManager = $this->getDoctrine()->getManager();
+            $carId = $car["id"];
 
-            //$entityManager->flush();
-            var_dump($id);
-            //var_dump("gites dodano do bazy");
-            return $this->redirectToRoute('remove');
+            $searchedCar = $this->getDoctrine()->getRepository(Car::class)->find($carId);
+
+            if(!$searchedCar)
+            {
+                return $this->redirectToRoute('remove_failed', [
+                ]);
+            }
+            else
+            {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($searchedCar);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('remove_successed');
+            }
         }
 
         return $this->render('main/index.html.twig', [
-            'form' => $form->createView(),
+            'form' => $createForm->createView(),
             'removeForm' => $removeForm->createView(),
         ]);
     }

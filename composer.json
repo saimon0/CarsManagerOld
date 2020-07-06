@@ -5,6 +5,7 @@
         "php": "^7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "php-http/curl-client": "^2.1",
         "sensio/framework-extra-bundle": "^5.5",
         "symfony/asset": "5.1.*",
         "symfony/console": "5.1.*",
@@ -29,8 +30,7 @@
         "symfony/validator": "5.1.*",
         "symfony/web-link": "5.1.*",
         "symfony/webpack-encore-bundle": "^1.7",
-        "symfony/yaml": "5.1.*",
-      "ext-http": "*"
+        "symfony/yaml": "5.1.*"
     },
     "require-dev": {
         "symfony/debug-pack": "*",

@@ -1,0 +1,47 @@
+body
+{
+    background-color: lightgray;
+}
+
+
+#create-form-div
+{
+    display: none;
+    margin-top: 2em;
+}
+
+#remove-form-div
+{
+    display: none;
+    margin-top: 2em;
+}
+
+#add-car-btn
+{
+    margin-right: 0.3em;
+}
+
+#remove-car-btn
+{
+    margin-right: 0.3em;
+}
+
+#update-car-btn
+{
+    margin-right: 0.3em;
+}
+
+#form-div
+{
+    margin-top: 2em;
+}
+
+#form-add-car
+{
+    margin-top: 1em;
+}
+
+#display-info
+{
+    font-weight: bold;
+}

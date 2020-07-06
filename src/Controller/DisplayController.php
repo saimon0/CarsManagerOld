@@ -13,16 +13,14 @@ class DisplayController extends AbstractController
      */
     public function index()
     {
-        $allCars = $this->displayCars();
         return $this->render('display/display.html.twig', [
-           'allCars' => $allCars,
+           'allCars' => $allCars = $this->displayCars(),
         ]);
     }
 
     public function displayCars()
     {
         $repository = $this->getDoctrine()->getRepository(Car::class);
-        $allCars = $repository->findAll();
-        return $allCars;
+        return $repository->findAll();
     }
 }

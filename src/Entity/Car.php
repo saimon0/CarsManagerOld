@@ -38,7 +38,7 @@ class Car
     private $engineType;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
+     * @ORM\Column(type="string", length=4, nullable=true)
      */
     private $engineCapacity;
 
@@ -100,12 +100,12 @@ class Car
         return $this;
     }
 
-    public function getEngineCapacity(): ?int
+    public function getEngineCapacity(): ?string
     {
         return $this->engineCapacity;
     }
 
-    public function setEngineCapacity(?float $engineCapacity): self
+    public function setEngineCapacity(?string $engineCapacity): self
     {
         $this->engineCapacity = $engineCapacity;
 

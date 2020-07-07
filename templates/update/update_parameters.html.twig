@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UpdateController!{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app_css') }}
+{% endblock %}
+
+{% block head %}
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid" id="main-container">
+        <h3>Current Car's parameters (id = {{ carId }})</h3>
+        <div class="container-fluid" id="div-display-car-update">
+            <table class="table table-bordered" id="current-car-params">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Mark</th>
+                    <th>Model</th>
+                    <th>Year of production</th>
+                    <th>Engine type</th>
+                    <th>Engine capacity</th>
+                    <th>VIN number</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ car.id }}</td>
+                        <td>{{ car.mark }}</td>
+                        <td>{{ car.model }}</td>
+                        <td>{{ car.yearProd }}</td>
+                        <td>{{ car.engineType }}</td>
+                        <td>{{ car.engineCapacity }}</td>
+                        <td>{{ car.vin }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="container-fluid" id="update-form-div">
+            <h5>Fullfill parameters to be updated</h5>
+            {{ form_start(updateForm) }}
+            <form id="form-update-car">
+                <div class="form-group w-25">
+                    {{ form_row(updateForm.mark, {'required': false}) }}
+                    <small id="emailHelp" class="form-text text-muted">e.g. Volkswagen, BMW, Opel etc.</small>
+                </div>
+                <div class="form-group w-25">
+                    {{ form_row(updateForm.model, {'required': false}) }}
+                    <small id="emailHelp" class="form-text text-muted">e.g. Golf, series 3, Astra etc.</small>
+                </div>
+                <div class="form-group w-25">
+                    {{ form_row(updateForm.yearProd, {'required': false}) }}
+                    <small id="emailHelp" class="form-text text-muted">4-digit number e.g. 1996, 2019</small>
+                </div>
+                <div class="form-group w-25">
+                    {{ form_row(updateForm.engineType, {'required': false}) }}
+                </div>
+                <div class="form-group w-25">
+                    {{ form_row(updateForm.engineCapacity, {'required': false}) }}
+                    <small id="emailHelp" class="form-text text-muted"><b>2-digit</b> engine's capacity e.g. 2.5 (dm3)</small>
+                </div>
+                <div class="form-group w-25">
+                    {{ form_row(updateForm.vin, {'required': false}) }}
+                    <small id="emailHelp" class="form-text text-muted">16-digit unique series number e.g. WOL123456789123</small>
+                </div>
+                <div class="form-check">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+           {{ form_end(updateForm) }}
+        </div>
+    </div>
+{% endblock %}

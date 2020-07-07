@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Car;
+use App\Form\RemoveCarType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DisplayController extends AbstractController

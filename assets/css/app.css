@@ -45,3 +45,24 @@ body
 {
     font-weight: bold;
 }
+
+#header-remove-success
+{
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    color: #008000;
+}
+
+#update-car-btn-submit {
+    margin-bottom: 1em;
+}
+
+#current-car-params
+{
+    margin-top: 0.5em;
+}
+
+#return-btn-update
+{
+    margin-left: 18.3em;
+}

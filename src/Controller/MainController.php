@@ -29,19 +29,11 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/remove/failed", name="remove_failed")
+     * @Route("/creation/failed/vin", name="creation_failed_vin")
      */
-    public function removeFailedPage()
+    public function creationFailedVinPage()
     {
-        return $this->render('main/remove_failed.html.twig');
-    }
-
-    /**
-     * @Route("/remove/success", name="remove_successed")
-     */
-    public function removeSuccessedPage()
-    {
-        return $this->render('main/remove_successed.html.twig');
+        return $this->render('main/creation_failed_vin.html.twig');
     }
 
     /**
@@ -57,6 +49,19 @@ class MainController extends AbstractController
         if($createForm->isSubmitted())
         {
             $car = $createForm->getData();
+
+            $vinNumber = $car->getVin();
+
+            $repository = $this->getDoctrine()->getRepository(Car::class);
+            $allCars = $repository->findAll();
+
+            foreach ($allCars as $element)
+            {
+                if ($element->getVin() == $vinNumber)
+                {
+                    return $this->redirectToRoute('creation_failed_vin');
+                }
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($car);

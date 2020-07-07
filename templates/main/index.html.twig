@@ -22,7 +22,7 @@
             <div class="row" id="nav-div">
                     <button type="button" class="btn btn-primary" id="add-car-btn">Add car</button>
                     <button type="button" class="btn btn-primary" id="remove-car-btn">Remove car</button>
-                    <button type="button" class="btn btn-primary" id="update-car-btn">Update car</button>
+                    <a href="{{ path('update') }}"><button type="button" class="btn btn-primary" id="update-car-btn">Update car</button></a>
                     <a href="{{ path('display') }}"><button type="button" class="btn btn-primary" id="display-car-btn">Display cars</button></a>
             </div>
         </div>
@@ -47,7 +47,7 @@
                 </div>
                 <div class="form-group w-25">
                     {{ form_row(form.engineCapacity) }}
-                    <small id="emailHelp" class="form-text text-muted">e.g. 2,5 (dm3)</small>
+                    <small id="emailHelp" class="form-text text-muted"><b>2-digit</b> engine's capacity e.g. 2.5 (dm3)</small>
                 </div>
                 <div class="form-group w-25">
                     {{ form_row(form.vin) }}
